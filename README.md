@@ -1,10 +1,12 @@
-<h1 align="center">🌀 XTRIME VIDEO DOWNLOADER 🌀</h1>
-
 <p align="center">
-  <strong>High-Quality • Auto Watermark • Gallery Save • Serial Naming</strong><br>
-  <img src="https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png" width="120px"/>
+  <img src="https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png" width="120" height="120" alt="Rexuraa Logo"/>
 </p>
 
+<p align="center">
+  <strong style="font-size: 28px;">🌀 XTRIME VIDEO DOWNLOADER 🌀</strong>
+</p>
+
+<p align="center"><strong>High-Quality • Auto Watermark • Gallery Save • Serial Naming</strong></p>
 ---
 
 ## 📽️ What is XTRIME?
@@ -88,15 +90,22 @@ Xtrime Video No.2.mp4
 💬 Example Preview
 
 🌀 XTRIME VIDEO DOWNLOADER 🌀
-Max Quality • Watermark • Serial Name • Gallery Save
 
-🔗 Enter Video URL: https://youtube.com/abc123
+• Max Quality
+• Watermark
+• Serial Name
+
+🔗 Enter Video URL: https://******
+
 📦 Estimated size: 58.23 MB
-✅ Download complete!
-🎬 Adding Watermark...
-✅ Saved to Gallery: /sdcard/Download/XTRIME/Xtrime Video No.1.mp4
-🔁 Download another video? (y/n): y
 
+✅ Download complete!
+
+🎬 Adding Watermark...
+
+✅ Saved to Gallery: /sdcard/Download/XTRIME/Xtrime Video No.1.mp4
+
+🔁 Download another video? (y/n): y
 
 ---
 
