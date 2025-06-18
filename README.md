@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong style="font-size: 28px;">🌀 XTRIME VIDEO DOWNLOADER 🌀</strong>
+  <strong style="font-size: 28px;">🌀 XTRIME DOWNLOADER 🌀</strong>
 </p>
 
 <p align="center"><strong>High-Quality • Auto Watermark • Serial Naming</strong></p>
@@ -30,7 +30,7 @@ pkg install python ffmpeg aria2 git -y
 pip install rich yt-dlp
 termux-setup-storage
 git clone https://github.com/rexuraa/xtrime-video-downloader.git
-cd xtrime-video-downloader
+cd xtrime_downloader
 python xtrime.py
 ```
 ---
