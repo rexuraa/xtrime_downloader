@@ -13,7 +13,7 @@ serial_file_video = "/data/data/com.termux/files/home/.xtrime_serial.txt"
 serial_file_music = "/data/data/com.termux/files/home/.xtrime_music_serial.txt"
 
 def download_logo():
-    logo_url = "https://raw.githubusercontent.com/rexuraa/XTRIME-DOWNLOADER/main/rexuraa.png"
+    logo_url = "https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png"
     save_path = LOGO_PATH
     if not os.path.exists("/sdcard/DCIM/Xtrime"):
         os.makedirs("/sdcard/DCIM/Xtrime")
