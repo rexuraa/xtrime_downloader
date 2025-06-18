@@ -29,7 +29,7 @@ pkg update && pkg upgrade -y
 pkg install python ffmpeg aria2 git -y
 pip install rich yt-dlp
 termux-setup-storage
-git clone https://github.com/rexuraa/xtrime-video-downloader.git
+git clone https://github.com/rexuraa/xtrime_downloader.git
 cd xtrime_downloader
 python xtrime.py
 ```
