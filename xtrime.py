@@ -33,7 +33,7 @@ def download_logo():
 def banner():
     os.system("clear")
     console.print("\n[bold cyan]🌀 XTRIME MULTIMEDIA DOWNLOADER 🌀[/]", justify="center")
-    console.print("[bold green]Max Quality • Watermark • MP3 • Gallery Save[/]\n", justify="center")
+    console.print("[bold green]Max Quality • Watermark • MP3 • By REXURAA[/]\n", justify="center")
 
 def get_next_serial(path):
     if not os.path.exists(path):
