@@ -31,8 +31,7 @@ pip install rich yt-dlp
 termux-setup-storage
 git clone https://github.com/rexuraa/xtrime_downloader.git
 cd xtrime_downloader
-bash run.sh
-xtrime
+python xtrime.py
 ```
 ---
 🟢 Then enter the video link when prompted:
