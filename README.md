@@ -6,7 +6,7 @@
   <strong style="font-size: 28px;">🌀 XTRIME VIDEO DOWNLOADER 🌀</strong>
 </p>
 
-<p align="center"><strong>High-Quality • Auto Watermark • Gallery Save • Serial Naming</strong></p>
+<p align="center"><strong>High-Quality • Auto Watermark • Serial Naming</strong></p>
 ---
 
 ## 📽️ What is XTRIME?
