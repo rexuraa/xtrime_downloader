@@ -12,21 +12,6 @@ SAVE_DIR_MUSIC = "/sdcard/Download/XTRIME/Music"
 serial_file_video = "/data/data/com.termux/files/home/.xtrime_serial.txt"
 serial_file_music = "/data/data/com.termux/files/home/.xtrime_music_serial.txt"
 
-def auto_update():
-    url = "https://raw.githubusercontent.com/rexuraa/xtrime_downloader/main/xtrime.py"
-    save_path = "xtrime.py"
-    try:
-        r = requests.get(url)
-        if r.status_code == 200:
-            with open(save_path, "wb") as f:
-                f.write(r.content)
-            print("✅ Auto-update complete. Please restart the tool.")
-            exit()
-    except:
-        print("⚠️ Auto-update failed. Using local version.")
-
-auto_update()
-
 def download_logo():
     logo_url = "https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png"
     save_path = LOGO_PATH
