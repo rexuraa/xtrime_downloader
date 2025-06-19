@@ -12,6 +12,21 @@ SAVE_DIR_MUSIC = "/sdcard/Download/XTRIME/Music"
 serial_file_video = "/data/data/com.termux/files/home/.xtrime_serial.txt"
 serial_file_music = "/data/data/com.termux/files/home/.xtrime_music_serial.txt"
 
+def auto_update():
+    url = "https://raw.githubusercontent.com/rexuraa/xtrime_downloader/main/xtrime.py"
+    save_path = "xtrime.py"
+    try:
+        r = requests.get(url)
+        if r.status_code == 200:
+            with open(save_path, "wb") as f:
+                f.write(r.content)
+            print("✅ Auto-update complete. Please restart the tool.")
+            exit()
+    except:
+        print("⚠️ Auto-update failed. Using local version.")
+
+auto_update()
+
 def download_logo():
     logo_url = "https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png"
     save_path = LOGO_PATH
@@ -79,7 +94,7 @@ def apply_watermark(input_video, output_video):
     console.print("[bold blue]🎬 Adding Watermark...[/]")
     cmd = (
         f'ffmpeg -y -i "{input_video}" -i "{LOGO_PATH}" '
-        f'-filter_complex "[1:v]scale=215:-1[wm];[0:v][wm]overlay=(W-w)/2:H-h-18" '
+        f'-filter_complex "[1:v]scale=215:-1[wm];[0:v][wm]overlay=(W-w)/2:H-h-15" '
         f'-preset ultrafast -c:v libx264 -crf 20 -c:a copy "{output_video}" > /dev/null 2>&1'
     )
     
