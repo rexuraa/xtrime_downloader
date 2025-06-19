@@ -79,7 +79,7 @@ def apply_watermark(input_video, output_video):
     console.print("[bold blue]🎬 Adding Watermark...[/]")
     cmd = (
         f'ffmpeg -y -i "{input_video}" -i "{LOGO_PATH}" '
-        f'-filter_complex "[1:v]scale=215:-1[wm];[0:v][wm]overlay=(W-w)/2:H-h-15" '
+        f'-filter_complex "[1:v]scale=215:-1[wm];[0:v][wm]overlay=(W-w)/2:H-h-20" '
         f'-preset ultrafast -c:v libx264 -crf 20 -c:a copy "{output_video}" > /dev/null 2>&1'
     )
     
