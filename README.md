@@ -26,12 +26,26 @@ Install these once in Termux:
 
 ```bash
 pkg update && pkg upgrade -y
+```
+```
 pkg install python ffmpeg aria2 git -y
+```
+```
 pip install rich yt-dlp
+```
+```
 termux-setup-storage
+```
+```
 git clone https://github.com/rexuraa/xtrime_downloader.git
+```
+```
 cd xtrime_downloader
+```
+```
 pip install requests
+```
+```
 python xtrime.py
 ```
 ---
