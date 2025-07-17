@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png" width="120" height="120" alt="Rexuraa Logo"/>
-  <h1 align="center">🌀 XTRIME DOWNLOADER 🌀</h1>
+  <h3 align="center">🌀 XTRIME DOWNLOADER 🌀</h3>
   <p align="center"><strong>High-Quality • Auto Watermark • Serial Naming • All-in-One Multimedia Tool</strong></p>
 </p>
 
@@ -148,4 +148,4 @@ Apache 2.0 License | Commercial Use Allowed | Attribution Required
   <a href="https://github.com/rexuraa/xtrime_downloader/issues">Report Issues</a> | 
   <a href="https://github.com/rexuraa/xtrime_downloader/stargazers">⭐ Star Project</a>
 </p>
-```
+
