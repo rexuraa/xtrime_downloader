@@ -139,10 +139,6 @@ xtrime
 `v1.5` - Added watermark system  
 `v2.0` - Complete redesign with Rich UI  
 
----
-Apache 2.0 License | Commercial Use Allowed | Attribution Required
----
-
 <p align="center">
   Built with ❤️ by <a href="https://github.com/rexuraa">@rexuraa</a> | 
   <a href="https://github.com/rexuraa/xtrime_downloader/issues">Report Issues</a> | 
