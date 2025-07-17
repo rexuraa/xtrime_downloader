@@ -225,7 +225,7 @@ def apply_blur_effect_with_progress(input_path, output_path, aspect="square", wi
         logo_filter = ""
         logo_input = []
         if with_logo and os.path.exists(LOGO_PATH):
-            logo_filter = "[1:v]scale=200:-1[logo];[final][logo]overlay=W-w-30:H-h-30[outv]"
+            logo_filter = "[1:v]scale=180:-1[logo];[final][logo]overlay=W-w-15:H-h-420[outv]"
             logo_input = ["-i", LOGO_PATH]
         else:
             logo_filter = "[final]copy[outv]"
@@ -319,8 +319,8 @@ def apply_padding_with_logo(input_path, output_path, pad_color, add_logo=True):
             filter_complex = (
                 f"[0:v]scale=1080:-2:force_original_aspect_ratio=decrease,"
                 f"pad=1080:1920:(ow-iw)/2:(oh-ih)/2:{pad_color},setsar=1[padded];"
-                f"[1:v]scale=200:-1[logo];"
-                f"[padded][logo]overlay=W-w-30:H-h-30"
+                f"[1:v]scale=180:-1[logo];"
+                f"[padded][logo]overlay=W-w-15:H-h-420"
             )
             cmd = [
                 "ffmpeg", "-y", "-hide_banner",
@@ -388,7 +388,7 @@ def apply_watermark(raw_path, watermarked_path):
     console.print("[bold blue]🎬 Adding Watermark...[/]")
     cmd = (
         f'ffmpeg -y -i "{raw_path}" -i "{LOGO_PATH}" '
-        f'-filter_complex "[1:v]scale=210:-1[wm];[0:v][wm]overlay=W-w-20:H-h-20" '
+        f'-filter_complex "[1:v]scale=180:-1[wm];[0:v][wm]overlay=W-w-15:H-h-20" '
         f'-preset ultrafast -c:v libx264 -crf 20 -c:a copy "{watermarked_path}"'
     )
     subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -1061,7 +1061,7 @@ def main():
         elif choice == "6":
             image_downloader_mode()
         elif choice == "7":
-            console.print("[green]Exiting... Goodbye![/]")
+            console.print("[bold cyan]👋 Exiting XTRIME Downloader.  Bye..![/]")
             cleanup_temp_files()
             break
 
