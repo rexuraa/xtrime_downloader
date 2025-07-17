@@ -1,28 +1,31 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png" width="120" height="120" alt="Rexuraa Logo"/>
+  <h1 align="center">🌀 XTRIME DOWNLOADER 🌀</h1>
+  <p align="center"><strong>High-Quality • Auto Watermark • Serial Naming • All-in-One Multimedia Tool</strong></p>
 </p>
-
-<p align="center">
-  <strong style="font-size: 28px;">🌀 XTRIME DOWNLOADER 🌀</strong>
-</p>
-
-<p align="center"><strong>High-Quality • Auto Watermark • Serial Naming</strong></p>
----
-
-## 📽️ What is XTRIME?
-
-**XTRIME** is a powerful, Termux-compatible video downloader that:
-- 🚀 Downloads videos in original **maximum quality**
-- 🖼️ Automatically adds your **brand/logo watermark**
-- 🔢 Automatically numbers videos like `Xtrime Video No.1`, `No.2`...
-- 📁 Saves videos to the Android **Gallery (Download/XTRIME)**
-- 🔁 Supports continuous downloads in one session
 
 ---
 
-## ⚙️ Requirements
+## 🚀 Features
 
-Install these once in Termux:
+✔ **Smart Downloading**  
+- YouTube, Facebook, Instagram and 1000+ sites support  
+- Best available quality (4K/1080p/720p auto-detection)  
+- Background download support  
+
+✔ **Automatic Processing**  
+- Auto-numbering (Xtrime Video No.1, No.2...)  
+- Watermark positioning (Bottom-right by default)  
+- Gallery integration (Auto-appears in Photos app)  
+
+✔ **Advanced Options**  
+- Custom logo support  
+- Multiple output formats (MP4, MP3, JPG)  
+- Batch download capability  
+
+---
+
+## 📥 Installation Guide
 
 ```bash
 pkg update && pkg upgrade -y
@@ -45,104 +48,104 @@ cd xtrime_downloader
 ```
 pip install requests
 ```
-```
+---
+### First Run
+```bash
 python xtrime.py
 ```
----
-🟢 Then enter the video link when prompted:
-
-🔗 Enter Video URL: https://www.youtube.com/watch?v=...
-
-🟢 The tool will:
-
-Download the video
-
-Apply the watermark
-
-Save it to: /sdcard/Download/XTRIME/
-
-Name it like: Xtrime Video No.1.mp4, No.2.mp4 etc.
-
-Broadcast to gallery auto-show
-
-
-🔁 After each video, you'll see:
-
-🔁 Download another video? (y/n):
-
-
+```
+echo "cd ~/xtrime && python xtrime.py" >> ~/.bashrc  
+source ~/.bashrc
+```
+```
+xtrime
+```
 ---
 
-🖼️ Logo Information
+## 🖼️ Customization
 
-By default, the tool uses:
+### Changing Logo
+1. Place your `logo.png` in:
+   ```
+   /sdcard/DCIM/Xtrime/rexuraa.png
+   ```
+2. Recommended size: 200x200px transparent PNG
 
-📁 /sdcard/DCIM/Xtrime/rexuraa.png
-
-If this file doesn't exist, it automatically downloads the logo from:
-
-https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png
-
-✅ You can change the logo anytime by replacing that PNG.
-
+### Output Locations
+- Videos: `/sdcard/XTRIME MULTIMEDIA/Videos`
+- Music: `/sdcard/XTRIME MULTIMEDIA/Music` 
+- Images: `/sdcard/XTRIME MULTIMEDIA/Images`
 
 ---
 
-📦 Output Folder
+## 🎯 Quick Start Guide
 
-All downloaded & watermarked videos are saved here:
+1. **Run the tool**:
+   ```bash
+   python xtrime.py
+   ```
+```
+   echo "cd ~/xtrime && python xtrime.py" >> ~/.bashrc  
+source ~/.bashrc
+```
+```
+xtrime
+```
+3. **Main Menu**:
+   ```
+   1. 🎥 Video Downloader
+   2. 🎵 Audio Downloader
+   3. ✂️ Video Cutter
+   4. 🚀 Advanced Tools
+   5. 📷 Image Downloader
+   ```
 
-/sdcard/Download/XTRIME/
-
-Example:
-
-Xtrime Video No.1.mp4
-Xtrime Video No.2.mp4
-
-
----
-
-💬 Example Preview
-
-🌀 XTRIME VIDEO DOWNLOADER 🌀
-
-• Max Quality
-• Watermark
-• Serial Name
-
-🔗 Enter Video URL: https://******
-
-📦 Estimated size: 58.23 MB
-
-✅ Download complete!
-
-🎬 Adding Watermark...
-
-✅ Saved to Gallery: /sdcard/Download/XTRIME/Xtrime Video No.1.mp4
-
-🔁 Download another video? (y/n): y
+4. **Example Flow**:
+   ```
+   🔗 Enter Video URL :https://youtu.be/example
+   📦 Estimated size: 125MB (1080p)
+   ⏳ Downloading...
+   🎬 Processing watermark...
+   ✅ Saved: Xtrime Video No.15.mp4
+   ```
 
 ---
 
-👨‍💻 Developer
+## 🔧 Troubleshooting
 
-Built with ❤️ by @rexuraa
-
-> YouTube | Instagram | Facebook Downloader — Fast, Smart, and Simple
-
-
-
-
----
-
-📬 Feedback or Support
-
-Found a bug or want to suggest a feature?
-📫 Open an issue or message me directly.
-
+| Issue | Solution |
+|-------|----------|
+| Download fails | Run `yt-dlp --update` |
+| Watermark not appearing | Check logo exists at `/sdcard/DCIM/Xtrime/` |
+| Videos not in Gallery | Run `termux-setup-storage` again |
 
 ---
 
-⭐ Star This Project
+## 🌟 Advanced Features
 
-If you like this tool, don't forget to ⭐ star the repository to support future updates!
+### Video Editing Tools
+- Background blur effect
+- Color padding (black bars)
+- Precise video trimming (HH:MM:SS)
+
+### Audio Extraction
+- Convert videos to MP3
+- Quality selection (128kbps to 320kbps)
+
+---
+
+## 📜 Version History
+`v1.0` - Initial release (Basic downloading)  
+`v1.5` - Added watermark system  
+`v2.0` - Complete redesign with Rich UI  
+
+---
+Apache 2.0 License | Commercial Use Allowed | Attribution Required
+---
+
+<p align="center">
+  Built with ❤️ by <a href="https://github.com/rexuraa">@rexuraa</a> | 
+  <a href="https://github.com/rexuraa/xtrime_downloader/issues">Report Issues</a> | 
+  <a href="https://github.com/rexuraa/xtrime_downloader/stargazers">⭐ Star Project</a>
+</p>
+```
