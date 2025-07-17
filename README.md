@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png" width="120" height="120" alt="Rexuraa Logo"/>
-  <h3 align="center">🌀 XTRIME DOWNLOADER 🌀</h3>
-  <p align="center"><strong>High-Quality • Auto Watermark • Serial Naming • All-in-One Multimedia Tool</strong></p>
+  <h4 align="center">🌀 XTRIME DOWNLOADER 🌀</h4>
+  <p align="center"><strong>High-Quality •Auto Watermark •Serial Naming•All-in-One-Multimedia Tool</strong></p>
 </p>
 
 ---
