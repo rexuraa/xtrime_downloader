@@ -384,11 +384,148 @@ def apply_padding_with_logo(input_path, output_path, pad_color, add_logo=True):
         console.print(f"[red]Error: {str(e)}[/]")
         return False
 
+def rotate_video(input_path, output_path, rotation, add_logo=True):
+    try:
+        duration = get_video_duration(input_path)
+        if duration <= 0:
+            console.print("[red]Could not get video duration[/]")
+            return False
+
+        logo_filter = ""
+        logo_input = []
+        if add_logo and os.path.exists(LOGO_PATH):
+            logo_filter = "[1:v]scale=180:-1[logo];[rotated][logo]overlay=W-w-15:H-h-20[outv]"
+            logo_input = ["-i", LOGO_PATH]
+        else:
+            logo_filter = "[rotated]copy[outv]"
+
+        if rotation == "90":
+            rotate_filter = "transpose=1"
+        elif rotation == "180":
+            rotate_filter = "transpose=1,transpose=1"
+        elif rotation == "270":
+            rotate_filter = "transpose=2"
+        else:
+            rotate_filter = "hflip"
+        
+        filter_complex = (
+            f"[0:v]{rotate_filter}[rotated];"
+            f"{logo_filter}"
+        )
+
+        cmd = [
+            'ffmpeg', '-y', '-hide_banner',
+            '-i', input_path,
+            *logo_input,
+            '-filter_complex', filter_complex,
+            '-map', '[outv]',
+            '-map', '0:a?',
+            '-c:v', 'libx264',
+            '-preset', 'ultrafast',
+            '-crf', '20', 
+            '-c:a', 'copy', 
+            '-movflags', '+faststart',
+            output_path
+        ]
+
+        with Progress() as progress:
+            task = progress.add_task("[cyan]Rotating video...", total=duration)
+            process = subprocess.Popen(
+                cmd,
+                stderr=subprocess.PIPE,
+                universal_newlines=True
+            )
+            
+            while True:
+                line = process.stderr.readline()
+                if not line and process.poll() is not None:
+                    break
+                if 'time=' in line:
+                    time_match = re.search(r'time=(\d+):(\d+):(\d+\.\d+)', line)
+                    if time_match:
+                        h, m, s = time_match.groups()
+                        current_time = float(h)*3600 + float(m)*60 + float(s)
+                        progress.update(task, completed=current_time)
+
+        if process.returncode != 0:
+            console.print("[red]Video rotation failed![/]")
+            return False
+
+        console.print("[green]✅ Video rotated successfully![/]")
+        return True
+
+    except Exception as e:
+        console.print(f"[red]Error: {str(e)}[/]")
+        return False
+        
+def rooted_video_mode():
+    while True:
+        banner()
+        console.print("\n[bold cyan]🔄 ROOTED VIDEO TOOL[/]")
+        console.print("1. From Device Storage")
+        console.print("2. Download Online")
+        console.print("3. ↩️ Back to Advanced Menu")
+        
+        choice = input_choice("Select (1-3): ", ["1", "2", "3"])
+        if choice == "3":
+            break
+
+        input_path = os.path.join(TEMP_DIR, "temp_rooted.mp4")
+
+        if choice == "1":
+            if not check_storage_permission():
+                continue
+            video_name = input("\nEnter video filename (e.g. video.mp4): ").strip()
+            if not video_name:
+                continue
+            video_path = find_video_file(video_name)
+            if not video_path:
+                continue
+            try:
+                shutil.copy2(video_path, input_path)
+                console.print(f"[green]✓ Video loaded![/]")
+            except Exception as e:
+                console.print(f"[red]Error: {e}[/]")
+                continue
+
+        elif choice == "2":
+            url = input("\nEnter URL: ").strip()
+            if not url:
+                continue
+            if not download_video(url, input_path, is_youtube=False):
+                continue
+
+        console.print("\n🔄 [bold]Select Rotation:[/]")
+        console.print("1. Rotate 90° Clockwise")
+        console.print("2. Rotate 180°")
+        console.print("3. Rotate 270° Clockwise")
+        console.print("4. Flip Horizontal")
+        rotation = input_choice("Choose (1-4): ", ["1", "2", "3", "4"])
+        rotation = {"1": "90", "2": "180", "3": "270", "4": "hflip"}[rotation]
+
+        add_logo = input_choice("\nAdd logo? (y/n): ", ["y", "n"]) == 'y'
+
+        serial = get_next_serial(serial_file_video)
+        output_path = os.path.join(TEMP_DIR, f"Xtrime Rooted {serial}.mp4")
+
+        if rotate_video(input_path, output_path, rotation, add_logo):
+            saved_path = move_to_gallery(output_path)
+            if saved_path:
+                save_to_history("video", saved_path)
+                update_serial(serial_file_video, serial)
+
+        for f in [input_path, output_path]:
+            if os.path.exists(f):
+                os.remove(f)
+
+        if input("\nProcess another? (y/n): ").lower() != 'y':
+            break
+
 def apply_watermark(raw_path, watermarked_path):
     console.print("[bold blue]🎬 Adding Watermark...[/]")
     cmd = (
         f'ffmpeg -y -i "{raw_path}" -i "{LOGO_PATH}" '
-        f'-filter_complex "[1:v]scale=180:-1[wm];[0:v][wm]overlay=W-w-15:H-h-20" '
+        f'-filter_complex "[1:v]scale=180:-1[wm];[0:v][wm]overlay=W-w-10:H-h-25" '
         f'-preset ultrafast -c:v libx264 -crf 20 -c:a copy "{watermarked_path}"'
     )
     subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -706,10 +843,11 @@ def advance_video_mode():
         console.print("\n[bold cyan]🚀 ENHANCED ADVANCED MODE[/]")
         console.print("1. Blur BG + Center Video (With Progress)")
         console.print("2. Add Color Bar/Pad (With Progress)")
-        console.print("3. ↩️ Back to Main Menu")
+        console.print("3. Rotate/Flip Video (Rooted Tool)")
+        console.print("4. ↩️ Back to Main Menu")
 
-        choice = input_choice("Select (1-3): ", ["1", "2", "3"])
-        if choice == "3":
+        choice = input_choice("Select (1-4): ", ["1", "2", "3", "4"])
+        if choice == "4":
             break
 
         console.print("\n[cyan]📁 Select Source:[/]")
@@ -799,7 +937,6 @@ def advance_video_mode():
                 ("🎨 Custom Color", "custom")
             ]
 
-            # Display colors in 1 columns
             for i, (emoji_text, hex_code) in enumerate(color_options, 1):
                 console.print(f"{i:2d}. {emoji_text:<20}")
 
@@ -827,6 +964,25 @@ def advance_video_mode():
             if saved_path:
                 save_to_history("video", saved_path)
                 console.print(f"[green]✓ Padded with {selected_color} {'+ logo' if add_logo else ''}![/]")
+
+        elif choice == "3":  # New Rooted Video Option
+            console.print("\n🔄 [bold cyan]Select Rotation:[/]")
+            console.print("1. Rotate 90° Clockwise")
+            console.print("2. Rotate 180°")
+            console.print("3. Rotate 270° Clockwise")
+            console.print("4. Flip Horizontal")
+            rotation_choice = input_choice("Select (1-4): ", ["1", "2", "3", "4"])
+            rotation = {"1": "90", "2": "180", "3": "270", "4": "hflip"}[rotation_choice]
+
+            add_logo = input_choice("\nAdd logo? (y/n): ", ["y", "n"]) == 'y'
+
+            if not rotate_video(input_path, output_path, rotation, add_logo):
+                continue
+
+            saved_path = move_to_gallery(output_path)
+            if saved_path:
+                save_to_history("video", saved_path)
+                console.print("[bold]✓ Video rotated successfully![/]")
 
         # Clean up
         for f in [input_path, output_path]:
