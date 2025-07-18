@@ -584,138 +584,118 @@ def video_cut_mode():
             except Exception as e:
                 console.print(f"[red]Copy failed: {e}[/]")
                 continue
-                
+
         elif source == "2":
             url = input("\nEnter URL: ").strip()
             if not url:
                 continue
-            
+
             is_youtube = input_choice("Is this YouTube? (y/n): ", ["y", "n"]) == 'y'
             input_path = os.path.join(TEMP_DIR, "temp_cut.mp4")
 
             if not download_video(url, input_path, is_youtube):
                 continue
 
-            # Get video duration
-            duration = get_video_duration(input_path)
-            if duration <= 0:
-                console.print("[red]Could not get video duration[/]")
-                if os.path.exists(input_path):
-                    os.remove(input_path)
-                continue
+        # ===== COMMON VIDEO CUTTING SECTION FOR BOTH =====
+        duration = get_video_duration(input_path)
+        if duration <= 0:
+            console.print("[red]Could not get video duration[/]")
+            if os.path.exists(input_path):
+                os.remove(input_path)
+            continue
 
-            console.print(f"\nVideo duration: {time.strftime('%H:%M:%S', time.gmtime(duration))}")
-            
-            # Get cut parameters
-            console.print("\nEnter start time (e.g. 1:30 or 90s or 1m30s):")
-            start_time = input("Leave empty to start from beginning: ").strip()
-            
-            console.print("\nEnter end time (e.g. 2:00 or 120s or 2m):")
-            end_time = input(f"Leave empty to go to end (max {time.strftime('%H:%M:%S', time.gmtime(duration))}): ").strip()
+        console.print(f"\nVideo duration: {time.strftime('%H:%M:%S', time.gmtime(duration))}")
+        
+        # Start Time
+        console.print("\nEnter start time (e.g. 1:30 or 90s or 1m30s):")
+        start_time = input("Leave empty to start from beginning: ").strip()
 
-            # Parse times
-            start_sec = 0
-            if start_time:
-                try:
-                    if ':' in start_time:
-                        parts = list(map(float, start_time.split(':')))
-                        if len(parts) == 2:
-                            start_sec = parts[0]*60 + parts[1]
-                        elif len(parts) == 3:
-                            start_sec = parts[0]*3600 + parts[1]*60 + parts[2]
-                    else:
-                        if 'h' in start_time or 'm' in start_time or 's' in start_time:
-                            start_sec = 0
-                            if 'h' in start_time:
-                                start_sec += int(start_time.split('h')[0]) * 3600
-                                start_time = start_time.split('h')[1]
-                            if 'm' in start_time:
-                                start_sec += int(start_time.split('m')[0]) * 60
-                                start_time = start_time.split('m')[1]
-                            if 's' in start_time:
-                                start_sec += int(start_time.split('s')[0])
-                        else:
-                            start_sec = float(start_time)
-                except:
-                    console.print("[red]Invalid start time format! Using 0[/]")
-                    start_sec = 0
+        # End Time
+        console.print("\nEnter end time (e.g. 2:00 or 120s or 2m):")
+        end_time = input(f"Leave empty to go to end (max {time.strftime('%H:%M:%S', time.gmtime(duration))}): ").strip()
 
-            end_sec = duration
-            if end_time:
-                try:
-                    if ':' in end_time:
-                        parts = list(map(float, end_time.split(':')))
-                        if len(parts) == 2:
-                            end_sec = parts[0]*60 + parts[1]
-                        elif len(parts) == 3:
-                            end_sec = parts[0]*3600 + parts[1]*60 + parts[2]
-                    else:
-                        if 'h' in end_time or 'm' in end_time or 's' in end_time:
-                            end_sec = 0
-                            if 'h' in end_time:
-                                end_sec += int(end_time.split('h')[0]) * 3600
-                                end_time = end_time.split('h')[1]
-                            if 'm' in end_time:
-                                end_sec += int(end_time.split('m')[0]) * 60
-                                end_time = end_time.split('m')[1]
-                            if 's' in end_time:
-                                end_sec += int(end_time.split('s')[0])
-                        else:
-                            end_sec = float(end_time)
-                except:
-                    console.print(f"[red]Invalid end time format! Using full duration ({duration}s)[/]")
-                    end_sec = duration
-
-            # Validate times
-            if start_sec >= end_sec:
-                console.print("[red]Start time must be before end time![/]")
-                if os.path.exists(input_path):
-                    os.remove(input_path)
-                continue
-
-            if end_sec > duration:
-                console.print("[yellow]End time exceeds video duration, using max duration[/]")
-                end_sec = duration
-
-            # Prepare output
-            serial = get_next_serial(serial_file_video)
-            output_name = f"Xtrime Cut {serial}.mp4"
-            output_path = os.path.join(TEMP_DIR, output_name)
-
-            # Cut video
-            console.print(f"\nCutting from {time.strftime('%H:%M:%S', time.gmtime(start_sec))} to {time.strftime('%H:%M:%S', time.gmtime(end_sec))}")
-            
-            start_time_str = time.strftime('%H:%M:%S', time.gmtime(start_sec))
-            end_time_str = time.strftime('%H:%M:%S', time.gmtime(end_sec))
-            
-            if not cut_video(input_path, output_path, start_time_str, end_time_str):
-                if os.path.exists(input_path):
-                    os.remove(input_path)
-                continue
-
-            # Ask for watermark
-            add_watermark = input_choice("\nAdd watermark? (y/n): ", ["y", "n"]) == 'y'
-            if add_watermark and os.path.exists(LOGO_PATH):
-                watermarked_path = os.path.join(TEMP_DIR, f"watermarked_{output_name}")
-                if apply_watermark(output_path, watermarked_path):
-                    os.remove(output_path)
-                    output_path = watermarked_path
+        # Parse times
+        def parse_time(t):
+            try:
+                if ':' in t:
+                    parts = list(map(float, t.split(':')))
+                    if len(parts) == 2:
+                        return parts[0]*60 + parts[1]
+                    elif len(parts) == 3:
+                        return parts[0]*3600 + parts[1]*60 + parts[2]
+                elif 'h' in t or 'm' in t or 's' in t:
+                    sec = 0
+                    if 'h' in t:
+                        sec += int(t.split('h')[0]) * 3600
+                        t = t.split('h')[1]
+                    if 'm' in t:
+                        sec += int(t.split('m')[0]) * 60
+                        t = t.split('m')[1]
+                    if 's' in t:
+                        sec += int(t.split('s')[0])
+                    return sec
                 else:
-                    console.print("[yellow]Proceeding without watermark[/]")
+                    return float(t)
+            except:
+                return None
 
-            # Move to gallery
-            saved_path = move_to_gallery(output_path)
-            if saved_path:
-                save_to_history("video", saved_path)
-                update_serial(serial_file_video, serial)
+        start_sec = parse_time(start_time) if start_time else 0
+        end_sec = parse_time(end_time) if end_time else duration
 
-            # Cleanup
-            for f in [input_path, output_path]:
-                if os.path.exists(f):
-                    try:
-                        os.remove(f)
-                    except:
-                        pass
+        if start_sec is None:
+            console.print("[red]Invalid start time! Using 0[/]")
+            start_sec = 0
+        if end_sec is None:
+            console.print(f"[red]Invalid end time! Using full duration ({duration}s)[/]")
+            end_sec = duration
+
+        if start_sec >= end_sec:
+            console.print("[red]Start time must be before end time![/]")
+            if os.path.exists(input_path):
+                os.remove(input_path)
+            continue
+
+        if end_sec > duration:
+            console.print("[yellow]End time exceeds video duration, using max duration[/]")
+            end_sec = duration
+
+        # Prepare output
+        serial = get_next_serial(serial_file_video)
+        output_name = f"Xtrime Cut {serial}.mp4"
+        output_path = os.path.join(TEMP_DIR, output_name)
+
+        console.print(f"\nCutting from {time.strftime('%H:%M:%S', time.gmtime(start_sec))} to {time.strftime('%H:%M:%S', time.gmtime(end_sec))}")
+        start_time_str = time.strftime('%H:%M:%S', time.gmtime(start_sec))
+        end_time_str = time.strftime('%H:%M:%S', time.gmtime(end_sec))
+
+        if not cut_video(input_path, output_path, start_time_str, end_time_str):
+            if os.path.exists(input_path):
+                os.remove(input_path)
+            continue
+
+        # Ask for watermark
+        add_watermark = input_choice("\nAdd watermark? (y/n): ", ["y", "n"]) == 'y'
+        if add_watermark and os.path.exists(LOGO_PATH):
+            watermarked_path = os.path.join(TEMP_DIR, f"watermarked_{output_name}")
+            if apply_watermark(output_path, watermarked_path):
+                os.remove(output_path)
+                output_path = watermarked_path
+            else:
+                console.print("[yellow]Proceeding without watermark[/]")
+
+        # Move to gallery
+        saved_path = move_to_gallery(output_path)
+        if saved_path:
+            save_to_history("video", saved_path)
+            update_serial(serial_file_video, serial)
+
+        # Cleanup
+        for f in [input_path, output_path]:
+            if os.path.exists(f):
+                try:
+                    os.remove(f)
+                except:
+                    pass
 
         if input("\nCut another? (y/n): ").strip().lower() != 'y':
             break
