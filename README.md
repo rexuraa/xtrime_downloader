@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png" width="140" height="140" alt="Rexuraa Logo"/>
   <h4 align="center">🌀 XTRIME DOWNLOADER 🌀</h4>
-  ---
+  
 
 ## 🚀 Features
 
@@ -115,6 +115,14 @@ python xtrime.py
 `v1.5` - Added watermark system  
 `v2.0` - Complete redesign with Rich UI  
 
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).  
+Feel free to use, modify, and distribute — no warranty provided.
+
+
+
+
 
 <p align="center">
   Built with ❤️ by <a href="https://github.com/rexuraa">@rexuraa</a> | 
@@ -122,10 +130,3 @@ python xtrime.py
 <a href="https://github.com/rexuraa/xtrime_downloader/stargazers">⭐ Star Project</a>
 </p>
 
-
-
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).  
-Feel free to use, modify, and distribute — no warranty provided.
