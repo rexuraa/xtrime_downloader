@@ -139,6 +139,11 @@ xtrime
 `v1.5` - Added watermark system  
 `v2.0` - Complete redesign with Rich UI  
 
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).  
+Feel free to use, modify, and distribute — no warranty provided.
+
 <p align="center">
   Built with ❤️ by <a href="https://github.com/rexuraa">@rexuraa</a> | 
   <a href="https://github.com/rexuraa/xtrime_downloader/issues">Report Issues</a> | 
