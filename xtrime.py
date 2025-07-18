@@ -225,7 +225,7 @@ def apply_blur_effect_with_progress(input_path, output_path, aspect="square", wi
         logo_filter = ""
         logo_input = []
         if with_logo and os.path.exists(LOGO_PATH):
-            logo_filter = "[1:v]scale=180:-1[logo];[final][logo]overlay=W-w-15:H-h-420[outv]"
+            logo_filter = "[1:v]scale=180:-1[logo];[final][logo]overlay=W-w-10:H-h-400[outv]"
             logo_input = ["-i", LOGO_PATH]
         else:
             logo_filter = "[final]copy[outv]"
@@ -320,7 +320,7 @@ def apply_padding_with_logo(input_path, output_path, pad_color, add_logo=True):
                 f"[0:v]scale=1080:-2:force_original_aspect_ratio=decrease,"
                 f"pad=1080:1920:(ow-iw)/2:(oh-ih)/2:{pad_color},setsar=1[padded];"
                 f"[1:v]scale=180:-1[logo];"
-                f"[padded][logo]overlay=W-w-15:H-h-420"
+                f"[padded][logo]overlay=W-w-10:H-h-400"
             )
             cmd = [
                 "ffmpeg", "-y", "-hide_banner",
