@@ -1,9 +1,8 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png" width="140" height="140" alt="Rexuraa Logo"/>
   <h4 align="center">🌀 XTRIME DOWNLOADER 🌀</h4>
-  ---
   
-# XTRIME Downloader 🔥
+*XTRIME Downloader 🔥*:
 🎥 Termux-based YouTube Video & MP3 Downloader with Watermark, Blur, Cutter, Shorts & Reels Tool
 
 XTRIME is an all-in-one Python + FFmpeg tool for downloading videos, cutting clips, adding watermark/logo, blurring backgrounds, and making Instagram Reels/TikTok-ready videos directly in Termux.
