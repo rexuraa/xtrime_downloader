@@ -1,10 +1,7 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/rexuraa/rexuraa_logo/main/rexuraa.png" width="140" height="140" alt="Rexuraa Logo"/>
   <h4 align="center">🌀 XTRIME DOWNLOADER 🌀</h4>
-  <p align="center"><strong><br>High-Quality<br>Auto Watermark<br>Serial Naming<br>All-in-One<br>Multimedia Tool<br></strong></p>
-</p>
-
----
+  ---
 
 ## 🚀 Features
 
@@ -48,28 +45,20 @@ cd xtrime_downloader
 ```
 pip install requests
 ```
----
-### First Run
-```bash
+```
 python xtrime.py
 ```
-```
-echo "cd ~/xtrime && python xtrime.py" >> ~/.bashrc  
-source ~/.bashrc
-```
-```
-xtrime
-```
----
 
 ## 🖼️ Customization
 
 ### Changing Logo
 1. Place your `logo.png` in:
+   
    ```
    /sdcard/DCIM/Xtrime/rexuraa.png
    ```
-2. Recommended size: 200x200px transparent PNG
+   
+3. Recommended size: 200x200px transparent PNG
 
 ### Output Locations
 - Videos: `/sdcard/XTRIME MULTIMEDIA/Videos`
@@ -78,19 +67,6 @@ xtrime
 
 ---
 
-## 🎯 Quick Start Guide
-
-1. **Run the tool**:
-   ```bash
-   python xtrime.py
-   ```
-```
-   echo "cd ~/xtrime && python xtrime.py" >> ~/.bashrc  
-source ~/.bashrc
-```
-```
-xtrime
-```
 3. **Main Menu**:
    ```
    1. 🎥 Video Downloader
@@ -139,14 +115,17 @@ xtrime
 `v1.5` - Added watermark system  
 `v2.0` - Complete redesign with Rich UI  
 
+
+<p align="center">
+  Built with ❤️ by <a href="https://github.com/rexuraa">@rexuraa</a> | 
+<a href="https://github.com/rexuraa/xtrime_downloader/issues">Report Issues</a> | 
+<a href="https://github.com/rexuraa/xtrime_downloader/stargazers">⭐ Star Project</a>
+</p>
+
+
+
+
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).  
 Feel free to use, modify, and distribute — no warranty provided.
-
-<p align="center">
-  Built with ❤️ by <a href="https://github.com/rexuraa">@rexuraa</a> | 
-  <a href="https://github.com/rexuraa/xtrime_downloader/issues">Report Issues</a> | 
-  <a href="https://github.com/rexuraa/xtrime_downloader/stargazers">⭐ Star Project</a>
-</p>
-
